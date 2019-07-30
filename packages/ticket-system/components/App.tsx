@@ -2,6 +2,7 @@ import React from 'react'
 import SeatsMapComponent from './SeatsMapComponent'
 import BuyComponent from './BuyComponent'
 import OwnSeatsComponent from './OwnSeatsComponent'
+import { ITicket } from '../models'
 
 // 1，购票系统的座位分布数据
 // 2，购买 1-5 张票的条件：随机、连座（由于是公司举办的，假设：座位宽窄一样、所有座位价格一致、用户没有自由选座的要求）
@@ -15,49 +16,60 @@ import OwnSeatsComponent from './OwnSeatsComponent'
 */
 
 
-interface ITicket{
-  id: string,
-  area: string,
-  row: string,
-  seat: string,
-  price: number
-}
-
 interface IState{
-  ticketList: ITicket[]
+  ticketList: any[]
 }
 
-const MIN_SEAT_NUM = 50
-const MAX_SEAT_NUM = 100
-const ROW_NUM = 52
-
-export default class App extends React.Component<IState>{
+export default class App extends React.Component<{}, IState>{
   constructor(props: any) {
     super(props)
+    
     this.state = {
-      ticketList: []
+      ticketList: this.getReadyData()
     }
   }
 
   componentDidMount() {
     // set data
-    const initList:ITicket[] = []
-    for(let i=1; i<=4; i++){
-      for(let j = MIN_SEAT_NUM;j<MAX_SEAT_NUM; j=j+2) {
-        const row = 
-        initList.push()
-      }
-    }
     
+    // console.log(maps)
+    // this.setState({
+    //   ticketList: maps
+    // })
   }
 
   render () {
+    const { ticketList } = this.state
     return (
       <div>
-        <SeatsMapComponent />
+        <SeatsMapComponent ticketList={ticketList}/>
         <BuyComponent />
         <OwnSeatsComponent />
       </div>
     )
+  }
+
+  getReadyData() {
+    const maps = []
+    for (let i = 0; i < 4; i++) { // 区
+      const areas = []
+      for (let r = 0; r < 52; r++) { // 排
+        const rows = []
+        const seats = (r % 2 === 0) ? 50 + r : 50 + r - 1
+        for (let j = 0; j < seats; j++) { // 座
+          rows.push({
+            id: `${i + 1}-${r + 1}-${j + 1}`,
+            area: i + 1,
+            row: r + 1,
+            seat: j + 1,
+            price: 1,
+            isSaled: false
+          })
+        }
+        areas[r] = rows
+      }
+      maps[i] = areas
+    }
+    return maps
   }
 }

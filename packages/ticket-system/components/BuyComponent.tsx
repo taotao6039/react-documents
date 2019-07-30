@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 const BuyComponent = () => {
   const [count, setCount] = useState(0)
 
@@ -8,3 +10,5 @@ const BuyComponent = () => {
     </div>
   )
 }
+
+export default BuyComponent

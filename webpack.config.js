@@ -6,7 +6,7 @@ module.exports = (env, { mode = 'development' }) => {
   const config = {
     mode,
     entry: {
-      app: './src/index.tsx',
+      app: './packages/ticket-system/index.tsx',
     },
     devtool: '',
     resolve: {
@@ -76,7 +76,7 @@ module.exports = (env, { mode = 'development' }) => {
       }),
       new HtmlWebpackPlugin({
         filename: path.resolve(__dirname, 'dist/index.html'),
-        template: path.resolve(__dirname, 'src', 'index.html'),
+        template: path.resolve(__dirname, './packages/ticket-system/', 'index.html'),
       }),
       new webpack.HotModuleReplacementPlugin(),
     ];

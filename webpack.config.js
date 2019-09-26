@@ -6,7 +6,7 @@ module.exports = (env, { mode = 'development' }) => {
   const config = {
     mode,
     entry: {
-      app: './packages/ticket-system/index.tsx',
+      app: './packages/demo/index.tsx',
     },
     devtool: '',
     resolve: {
@@ -40,7 +40,7 @@ module.exports = (env, { mode = 'development' }) => {
       path: path.resolve(__dirname, 'dist'),
       filename: 'index.js',
       libraryTarget: 'umd',
-      publicPath: '/dist/',
+      publicPath: '../dist/',
       umdNamedDefine: true,
     },
     optimization: {
@@ -51,7 +51,7 @@ module.exports = (env, { mode = 'development' }) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"',
+        'process.env.NODE_ENV': 'production',
       }),
     ],
   };
@@ -72,11 +72,11 @@ module.exports = (env, { mode = 'development' }) => {
     });
     config.plugins = [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"development"',
+        'process.env.NODE_ENV': 'development',
       }),
       new HtmlWebpackPlugin({
         filename: path.resolve(__dirname, 'dist/index.html'),
-        template: path.resolve(__dirname, './packages/ticket-system/', 'index.html'),
+        template: path.resolve(__dirname, './packages/demo/', 'index.html'),
       }),
       new webpack.HotModuleReplacementPlugin(),
     ];

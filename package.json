@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx webpack-dev-server --open --colors --hot --mode development",
+    "build": "webpack --config webpack.config.js --env.production",
     "test": "npm run test"
   },
   "keywords": [

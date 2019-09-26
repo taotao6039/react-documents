@@ -23,8 +23,33 @@ import App from './components/App'
 //   )
 // }
 
-export default ReactDOM.render((
-  <Provider store={store}>
-    <App />
-  </Provider>
-), document.getElementById('app'))
+// export default ReactDOM.render((
+//   <Provider store={store}>
+//     <App />
+//   </Provider>
+// ), document.getElementById('app'))
+
+class Students {
+  public name: string
+  
+  constructor(name) {
+    this.name = name
+  }
+
+  hello() {
+    console.log(`my name is ${this.name}`)
+  }
+}
+
+export default class primaryStudents extends Students {
+  public grade: number
+  constructor(name, grade) {
+    super(name)
+    this.grade = grade
+  }
+
+  read() {
+    console.log(`Im reading Grade ${this.grade}`)
+  }
+}
+
